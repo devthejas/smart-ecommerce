@@ -104,7 +104,7 @@ smart-ecommerce-checkout/
 
 ### 1. Clone the Repository
 
-git clone https://github.com/albin-shaji/smart-ecommerce-checkout.git
+git clone https://github.com/devthejas/smart-ecommerce
 cd smart-ecommerce-checkout
 
 ### 2. Create Docker Network
@@ -213,4 +213,4 @@ Open http://localhost:15672 → Login: guest / guest → Queues tab → payment_
 MCA Student | Palakkad, Kerala
 
 [![GitHub](https://img.shields.io/badge/GitHub-devthejas-black?logo=github)](https://github.com/devthejas)
-[![Email](https://img.shields.io/badge/Email-myname@gmail.com-red?logo=gmail)](mailto:myname@gmail.com)
+[![Email](https://img.shields.io/badge/Email-thejas.ks@lead.ac.in-red?logo=gmail)](mailto:thejas.ks@lead.ac.in)
