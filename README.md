@@ -1,6 +1,6 @@
-# 🛒 Smart E-Commerce Checkout Workflow
+# 🛒 Smart E-Commerce Checkout System
 
-> A backend microservices system simulating a real-world e-commerce checkout pipeline — built without any UI, demonstrated entirely through API calls.
+> Complete backend microservices pipeline for e-commerce checkout flow — API-driven, no frontend required.
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
 ![Flask](https://img.shields.io/badge/Flask-REST%20API-lightgrey?logo=flask)
@@ -10,11 +10,11 @@
 
 ---
 
-## 📌 Overview
+## 📋 Project Summary
 
-This project connects multiple independent microservices into a complete e-commerce checkout flow — similar to how **Amazon** or **Flipkart** handles cart, discount, payment, and inventory behind the scenes.
+Demonstrates full e-commerce checkout workflow using decoupled microservices, mimicking **Amazon**/**Flipkart** backend architecture.
 
-Built as part of the **Cloud Computing** subject assignment for **MCA**.
+**MCA Cloud Computing coursework project.**
 
 ### Checkout Flow
 
@@ -24,7 +24,7 @@ Cart Service → Discount Service → Payment Service → Inventory Update → R
 
 ---
 
-## 🧱 System Architecture
+## 🏗️ Service Architecture Diagram
 
 ```
                         CLIENT (Postman)
@@ -54,15 +54,15 @@ Cart Service → Discount Service → Payment Service → Inventory Update → R
 
 ---
 
-## ⚙️ Tech Stack
+## 🛠️ Technology Stack
 
-| Technology     | Version | Purpose                      |
-| -------------- | ------- | ---------------------------- |
-| Python + Flask | 3.11    | Microservice REST APIs       |
-| MySQL          | 8.0     | Persistent database storage  |
-| RabbitMQ       | 3       | Asynchronous event messaging |
-| Docker         | Latest  | Service containerization     |
-| Postman        | Latest  | API testing & demonstration  |
+| Component      | Version | Usage                    |
+| -------------- | ------- | ------------------------ |
+| Python + Flask | 3.11    | REST API microservices   |
+| MySQL          | 8.0     | Database persistence     |
+| RabbitMQ       | 3       | Event-driven messaging   |
+| Docker         | Latest  | Container orchestration  |
+| Postman        | Latest  | API testing & validation |
 
 ---
 
@@ -104,34 +104,25 @@ smart-ecommerce-checkout/
 
 ### 1. Clone the Repository
 
-```
 git clone https://github.com/albin-shaji/smart-ecommerce-checkout.git
 cd smart-ecommerce-checkout
-```
 
 ### 2. Create Docker Network
 
-```
 docker network create ecommerce-net
-```
 
 ### 3. Start Infrastructure
 
-```
 docker run -d --name mysql-db --network ecommerce-net -e MYSQL_ROOT_PASSWORD=root123 -e MYSQL_DATABASE=ecommerce -p 3306:3306 mysql:8.0
 
 docker run -d --name rabbitmq --network ecommerce-net -p 5672:5672 -p 15672:15672 rabbitmq:3-management
-```
 
 ### 4. Initialize Database
 
-```
 docker exec -i mysql-db mysql -uroot -proot123 < db-init/init.sql
-```
 
 ### 5. Build & Run All Services
 
-```
 docker build -t inventory-service ./inventory-service
 docker run -d --name inventory --network ecommerce-net -p 5001:5001 inventory-service
 
@@ -143,13 +134,10 @@ docker run -d --name discount --network ecommerce-net -p 5003:5003 discount-serv
 
 docker build -t payment-service ./payment-service
 docker run -d --name payment --network ecommerce-net -p 5004:5004 payment-service
-```
 
 ### 6. Verify Everything is Running
 
-```
 docker ps
-```
 
 | Container | Port        | Status |
 | --------- | ----------- | ------ |
@@ -160,48 +148,36 @@ docker ps
 | discount  | 5003        | ✅ Up  |
 | payment   | 5004        | ✅ Up  |
 
----
-
 ## 🧪 Testing the Checkout Flow
 
 ### Step 1 — Add Item to Cart
 
-```
 POST http://localhost:5002/cart
 Body: { "product_id": 1, "quantity": 2 }
-```
 
 ### Step 2 — Apply Discount Code
 
-```
 POST http://localhost:5003/discount
 Body: { "code": "NEWYEAR", "original_price": 100000 }
-```
 
 ### Step 3 — Process Payment
 
-```
 POST http://localhost:5004/payment
 Body: { "product_id": 1, "quantity": 2, "discount_code": "NEWYEAR" }
-```
 
 ### Step 4 — Verify Inventory Updated
 
-```
 GET http://localhost:5001/inventory/1
-```
 
 ### Step 5 — Verify RabbitMQ Event
 
-```
 Open http://localhost:15672 → Login: guest / guest → Queues tab → payment_processed
-```
 
 ---
 
-## 🎟️ Available Discount Codes
+## 🎫 Coupon Codes List
 
-| Code    | Discount | Description     |
+| Coupon  | Discount | Offer Type      |
 | ------- | -------- | --------------- |
 | NEWYEAR | 10% off  | New Year offer  |
 | SAVE20  | 20% off  | Save more offer |
@@ -209,32 +185,32 @@ Open http://localhost:15672 → Login: guest / guest → Queues tab → payment_
 
 ---
 
-## 🗄️ Database Tables
+## 💾 Data Schema Overview
 
-| Table     | Purpose                              |
+| Table     | Function                             |
 | --------- | ------------------------------------ |
-| inventory | Stores product name, price, quantity |
-| cart      | Stores items added to cart           |
-| payments  | Stores all transaction records       |
+| inventory | Product catalog with pricing & stock |
+| cart      | Temporary shopping cart items        |
+| payments  | Payment transaction history          |
 
 ---
 
-## 🌐 Service Endpoints
+## 🔗 API Gateway URLs
 
-| Service            | Base URL               |
-| ------------------ | ---------------------- |
-| Inventory          | http://localhost:5001  |
-| Cart               | http://localhost:5002  |
-| Discount           | http://localhost:5003  |
-| Payment            | http://localhost:5004  |
-| RabbitMQ Dashboard | http://localhost:15672 |
+| Microservice | Endpoint               |
+| ------------ | ---------------------- |
+| Inventory    | http://localhost:5001  |
+| Cart         | http://localhost:5002  |
+| Discount     | http://localhost:5003  |
+| Payment      | http://localhost:5004  |
+| RabbitMQ UI  | http://localhost:15672 |
 
 ---
 
-## 👨‍💻 Author
+## 🙋‍♂️ Project Creator
 
-**Thejas K S**
-MCA Student | Palakkad, Kerala
+**Thejas K S**  
+MCA Student | Kurikuppi, Karnataka
 
-[![GitHub](https://img.shields.io/badge/GitHub-thejas--ks-black?logo=github)](https://github.com/devthejas)
-[![Email](https://img.shields.io/badge/Email-thejas.ks@lead.ac.in-red?logo=gmail)](mailto:thejas.ks@lead.ac.in)
+[![GitHub](https://img.shields.io/badge/GitHub-devthejas-black?logo=github)](https://github.com/devthejas)
+[![Email](https://img.shields.io/badge/Email-myname@gmail.com-red?logo=gmail)](mailto:myname@gmail.com)
