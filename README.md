@@ -210,7 +210,7 @@ Open http://localhost:15672 → Login: guest / guest → Queues tab → payment_
 ## 🙋‍♂️ Project Creator
 
 **Thejas K S**  
-MCA Student | Kurikuppi, Karnataka
+MCA Student | Palakkad, Kerala
 
 [![GitHub](https://img.shields.io/badge/GitHub-devthejas-black?logo=github)](https://github.com/devthejas)
 [![Email](https://img.shields.io/badge/Email-myname@gmail.com-red?logo=gmail)](mailto:myname@gmail.com)
